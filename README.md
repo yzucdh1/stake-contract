@@ -1,11 +1,11 @@
-# MetaNode stake contract
+# stake contract
 
 操作流程以及命令
 
 ## 拉取项目
 
 ```zsh
-git clone https://github.com/MetaNodeAcademy/Advanced2-contract-stake/tree/main/stake-contract
+git clone https://github.com/yzucdh1/stake-contract
 ```
 
 ## 安装依赖
