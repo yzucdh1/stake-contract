@@ -307,9 +307,7 @@ contract MetaNodeStake is
     /**
      * @notice Update the MetaNode reward amount per block. Can only be called by admin.
      */
-    function setMetaNodePerBlock(
-        uint256 _MetaNodePerBlock
-    ) public onlyRole(ADMIN_ROLE) {
+    function setMetaNodePerBlock(uint256 _MetaNodePerBlock) public onlyRole(ADMIN_ROLE) {
         require(_MetaNodePerBlock > 0, "invalid parameter");
 
         MetaNodePerBlock = _MetaNodePerBlock;
@@ -636,6 +634,7 @@ contract MetaNodeStake is
 
         require(user_.stAmount >= _amount, "Not enough staking token balance");
 
+        // update reward variables of the pool
         updatePool(_pid);
 
         uint256 pendingMetaNode_ = (user_.stAmount * pool_.accMetaNodePerST) /
@@ -648,6 +647,7 @@ contract MetaNodeStake is
 
         if (_amount > 0) {
             user_.stAmount = user_.stAmount - _amount;
+
             user_.requests.push(
                 UnstakeRequest({
                     amount: _amount,
@@ -657,6 +657,7 @@ contract MetaNodeStake is
         }
 
         pool_.stTokenAmount = pool_.stTokenAmount - _amount;
+
         user_.finishedMetaNode =
             (user_.stAmount * pool_.accMetaNodePerST) /
             (1 ether);
